@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MySQL.Entidades;
+using System.Linq;
 
 namespace MySQL.Controllers
 {
@@ -13,7 +14,7 @@ namespace MySQL.Controllers
         }
         public ActionResult Index()
         {
-            return View();
+            return View(db.USUARIOS.ToList());
         }
 
 
@@ -26,26 +27,33 @@ namespace MySQL.Controllers
         [HttpPost]
         public ActionResult Create(Usuario dadosQueVemTela)
         {
+            db.USUARIOS.Add(dadosQueVemTela);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
 
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(db.USUARIOS.Where(a=>a.Id == id).FirstOrDefault() );
         }
 
 
         [HttpPost]
         public ActionResult Edit(int id, Usuario dadosQueVemTela)
         {
+            db.USUARIOS.Update(dadosQueVemTela);
+            db.SaveChanges();
             return RedirectToAction("index");
         }
 
         // GET: UsuariosController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            db.USUARIOS.Remove(
+                db.USUARIOS.Where(a => a.Id == id).FirstOrDefault());
+            db.SaveChanges();
+            return RedirectToAction("index");
         }
 
 

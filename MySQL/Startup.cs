@@ -24,7 +24,7 @@ namespace MySQL
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<Contexto>(a => a.UseMySQL("Server=localhost;Database=RA;Uid=root;Pwd=;"));
+            services.AddDbContext<Contexto>(a => a.UseMySQL("Server=localhost;Database=0220832011038;Uid=root;Pwd=;"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
